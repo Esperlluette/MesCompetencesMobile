@@ -1,23 +1,17 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:mescompetences/component/FormLogin.dart';
-import 'package:mescompetences/object/User.dart';
+import '../object/User.dart' show User;
 
+class MyHomePage extends StatelessWidget {
+  MyHomePage({ Key? key }) : super(key: key);
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({ Key? key }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  late final User user;
-
+  
   @override
   Widget build(BuildContext context) {
+    final _user = ModalRoute.of(context)!.settings.arguments as User;
     return Scaffold(
-      appBar: AppBar(title: Text("data")),
+      appBar: AppBar(title: Text(_user.name)),
     );
   }
 }

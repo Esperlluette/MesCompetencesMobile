@@ -3,20 +3,24 @@
 import 'competence.dart';
 
 class User {
+  late String _id;
   late String _name;
   late String _token;
-  // late String _role;
+  late String _role;
   late List<competence?> _competences;
 
-  User(this._name, this._token);
+  User(this._id, this._name, this._token, this._role);
+
+  String get id => this._id;
+  set id(value) => this._id = value;
 
   String get name => this._name;
   set name(value) => this._name = value;
 
-  get token => this._token;
+  String get token => this._token;
   set token(value) => this._token = value;
 
-  // get role => this._role;
-  // set role(value) => this._role = value;
+  String get role => this._role;
+  set role(value) => this._role = value;
 
 }

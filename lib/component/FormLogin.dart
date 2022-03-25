@@ -1,3 +1,5 @@
+// ignore_for_file: slash_for_doc_comments
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -6,7 +8,6 @@ import '../pages/HomePage.dart';
 
 class FormLogin extends StatefulWidget {
   const FormLogin({Key? key}) : super(key: key);
-
   @override
   State<FormLogin> createState() => _FormLoginState();
 }
@@ -26,6 +27,8 @@ class _FormLoginState extends State<FormLogin> {
         children: [
           const Spacer(flex: 1),
           const Text("Email"),
+
+          //text field pour l'email, lorsqu'il est validé il y a une vérification de nullité 
           TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -37,6 +40,8 @@ class _FormLoginState extends State<FormLogin> {
           ),
           const Padding(padding: EdgeInsets.all(40)),
           const Text("mot de passe"),
+
+          //text field pour le mot de passe, lorsqu'il est validé il y a une vérification de nullité 
           TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -46,8 +51,20 @@ class _FormLoginState extends State<FormLogin> {
             },
             controller: _myControllerPassword,
           ),
+
           const Padding(padding: EdgeInsets.all(20)),
           ElevatedButton(
+            /**
+             * Bouton de connexion
+             * Si le formulaire est validé
+             * j'appel la fonction _getProfilInfos
+             * la variable map reçoit la conversion du résultat de _getProfilInfos
+             * 
+             * le booléen validCred reçoit le résultat de _login
+             * si validCred est faux 
+             *  alors 
+             *    - je lance la fonction _createAlert     
+             */
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   http.Response response = await _getProfilInfos(
@@ -68,6 +85,11 @@ class _FormLoginState extends State<FormLogin> {
     );
   }
 
+  /**
+   * Fonction d'accès aux données utilisateurs via API
+   * je me connecte à l'API donnée avec les identifiants fournis.   
+   */
+
   Future<http.Response> _getProfilInfos(String email, String password) async {
     return http.post(
       Uri.parse(
@@ -80,6 +102,16 @@ class _FormLoginState extends State<FormLogin> {
     );
   }
 
+  /**
+   * Fonction de login
+   * j'attends le retour de la fonction _getProfilInfos
+   * si le code retourné est différent de null 
+   *  alors
+   *    - je retourne null
+   * sinon
+   *    - je crée un User avec les infos retourné
+   *    - je pousse une nouvelle page avec comme arguments l'utilisateur
+   */
   Future<bool> _login(BuildContext context) async {
     await _getProfilInfos(_myControllerEmail.text, _myControllerPassword.text);
 
@@ -87,20 +119,23 @@ class _FormLoginState extends State<FormLogin> {
       return false;
     }
 
-    print(map);
 
-    User user = User(map[''], map['token']);
-
-
+    User user = User(map['id'].toString(),map['nom'].toString(), map['token'].toString(), map['roles'].toString());
 
 
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const MyHomePage(),
+            builder: (context) => MyHomePage(),
             settings: RouteSettings(arguments: user)));
     return true;
   }
+
+  /**
+   * Fonction de création d'alerte.
+   * Je retourne une alerte en cas d'erreur 401
+   * Login ou mot de passe incorrect 
+   */
 
   Future<void> _createAlert(String message) {
     return showDialog(

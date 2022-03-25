@@ -36,6 +36,10 @@ class _MyMainPageState extends State<MyMainPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
+        /**
+         * Page d'arrivé des utilisateurs 
+         * elle fait appel au formulaire de login situé dans component/FormLigin.dart
+         */
         body: FormLogin(),
         );
   }
