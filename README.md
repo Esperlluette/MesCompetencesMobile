@@ -1,16 +1,19 @@
-# mescompetences
+# MesCompetences
 
-A new Flutter project.
+Projet d'appli mobile MesCompetences pour l'épreuve E5 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Point de départ de l'appli mobile : 
 
-A few resources to get you started if this is your first Flutter project:
+  - La connexion est OK.
+  - Le transfer de données d'une page à une autre est OK.
+  - l'affichage de données est OK.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+En cas de problème avec le clonage du projet.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   - Essayez dans un premier temps de récuperer les dépendances dans le fichier pubspec.yaml
+   - Si le problème persiste essayez de vérifier le code (les noms de fichier ou des fichiers manquants).
+   - Vous pouvez aussi essayer de créer un nouveau projet flutter et d'y déplacer le dossier lib. 
+
+**n'oubliez pas de récuperer les dépendances après avoir crée un nouveau projet.**
